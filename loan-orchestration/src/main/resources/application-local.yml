@@ -4,6 +4,5 @@ spring:
   application:
     name: loan-orchestration
     version: 1.0
-  profiles:
-    active:
-      - uat
+  config:
+    import: configserver:http://config-server:8888

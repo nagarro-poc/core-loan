@@ -1,4 +1,4 @@
-package org.bfsi.orchstration.controller;
+package org.bfsi.orchestration.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package org.bfsi.orchstration.exception;
+package org.bfsi.orchestration.exception;
 
 public class InvalidRequestException {
 }
