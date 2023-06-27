@@ -1,8 +1,8 @@
 server:
   port: 8096
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://service-registry:8761/eureka
-    fetch-registry: true
-    register-with-eureka: true
+spring:
+  application:
+    name: loan-orchestration
+    version: 1.0
+  config:
+    import: configserver:http://config-server:8888

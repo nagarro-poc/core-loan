@@ -72,6 +72,15 @@ services:
       - "8095:8095"
     networks:
       - pre-defined-images_core-network
+  loan-orchestration:
+    container_name: loan-orchestration
+    build: ../../loan-orchestration
+    volumes:
+      - ~/nagarro/loan-orchestration:/logs
+    ports:
+      - "8096:8096"
+    networks:
+      - pre-defined-images_core-network
 networks:
   pre-defined-images_core-network:
     external: true

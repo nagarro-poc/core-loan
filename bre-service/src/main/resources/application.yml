@@ -1,8 +1,13 @@
 server:
   port: 8093
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://service-registry:8761/eureka
-    fetch-registry: true
-    register-with-eureka: true
+spring:
+  application:
+    name: bre-service
+    version: 1.0
+  profiles:
+    active:
+      - development
+  config:
+    import: configserver:http://config-server:8888
+
+
