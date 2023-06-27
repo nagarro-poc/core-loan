@@ -30,7 +30,8 @@
         <module>bureau-service</module>
 		<module>bre-service</module>
 		<module>hunter-service</module>
-	</modules>
+        <module>loan-orchestration</module>
+    </modules>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
