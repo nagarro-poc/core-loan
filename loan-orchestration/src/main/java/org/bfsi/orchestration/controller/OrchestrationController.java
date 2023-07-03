@@ -27,6 +27,7 @@ public class OrchestrationController {
 
     @PostMapping
     public ResponseEntity<LeadResponse> createLead(@RequestBody LeadRequest leadRequest) {
+        logger.info("lead create request received for -" + leadRequest.getContactDetails().getMobileNumber());
         try {
             leadService.generateLead(leadRequest);
             LeadResponse response = LeadResponse.builder().statusCode(HttpStatus.OK.toString()).message("Welcome to Orchestration").build();
