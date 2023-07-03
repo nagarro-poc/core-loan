@@ -4,5 +4,5 @@ spring:
   application:
     name: hunter-service
     version: 1.0
-  config:
-    import: configserver:http://config-server:8888
+#  config:
+#    import: configserver:http://config-server:8888
