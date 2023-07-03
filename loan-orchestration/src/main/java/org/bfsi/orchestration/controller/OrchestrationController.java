@@ -2,9 +2,9 @@ package org.bfsi.orchestration.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.bfsi.orchestration.OrchestrationServiceApplication;
 import org.bfsi.orchestration.entity.LeadRequest;
 import org.bfsi.orchestration.entity.LeadResponse;
+import org.bfsi.orchestration.exception.InvalidRequestException;
 import org.bfsi.orchestration.service.LeadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,6 +28,10 @@ public class OrchestrationController {
     @PostMapping
     public ResponseEntity<LeadResponse> createLead(@RequestBody LeadRequest leadRequest) {
         logger.info("lead create request received for -" + leadRequest.getContactDetails().getMobileNumber());
+        if(leadRequest.getBankDetails().getBankName().isBlank()){
+            throw new InvalidRequestException("Bank Name is Mandatory!");
+        }
+
         try {
             leadService.generateLead(leadRequest);
             LeadResponse response = LeadResponse.builder().statusCode(HttpStatus.OK.toString()).message("Welcome to Orchestration").build();

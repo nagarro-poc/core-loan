@@ -14,4 +14,9 @@ public class GlobalExceptionHandle extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>("Lead not found", HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(InvalidRequestException.class)
+    public ResponseEntity<Object> invalidRequestExceptionHandler(InvalidRequestException invalidRequestException){
+        return new ResponseEntity<>(invalidRequestException.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
 }
