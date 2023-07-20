@@ -1,4 +1,4 @@
-package org.bfsi.hunter;
+package org.bfsi.bureau.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/hunter")
-public class HunterController {
+@RequestMapping("/api/v1/bureau")
+public class BureauController {
 
     @GetMapping
     public ResponseEntity<String> test(){
-        return new ResponseEntity<String>("Welcome to Hunter", HttpStatus.OK);
+        return new ResponseEntity<String>("Welcome to Bureau", HttpStatus.OK);
     }
 
 }

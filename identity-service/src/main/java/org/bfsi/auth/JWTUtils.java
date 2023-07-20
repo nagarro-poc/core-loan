@@ -11,7 +11,7 @@ import javax.crypto.SecretKey;
 import java.util.*;
 
 public class JWTUtils {
-    private static long accessTokenExpiration = 600000;
+    private static long accessTokenExpiration = 6000000;
 
     private static long refreshTokenExpiration = 1200000;
 

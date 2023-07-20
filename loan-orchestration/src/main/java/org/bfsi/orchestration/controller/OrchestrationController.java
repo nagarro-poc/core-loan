@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.bfsi.orchestration.entity.LeadRequest;
 import org.bfsi.orchestration.entity.LeadResponse;
 import org.bfsi.orchestration.exception.InvalidRequestException;
+import org.bfsi.orchestration.service.GenerateLeadService;
 import org.bfsi.orchestration.service.LeadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,9 @@ public class OrchestrationController {
     @Autowired
     LeadService leadService;
 
+    @Autowired
+    GenerateLeadService generateLeadService;
+
     @GetMapping
     public ResponseEntity<String> test(){
         return new ResponseEntity<>("Welcome to Orchestration", HttpStatus.OK);
@@ -34,6 +38,7 @@ public class OrchestrationController {
 
         try {
             leadService.generateLead(leadRequest);
+            generateLeadService.generateLeadAction(leadRequest);
             LeadResponse response = LeadResponse.builder().statusCode(HttpStatus.OK.toString()).message("Welcome to Orchestration").build();
             logger.info(leadRequest.toString());
             return new ResponseEntity<>(response, HttpStatus.OK);
