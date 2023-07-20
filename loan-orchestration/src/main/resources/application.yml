@@ -1,20 +1,45 @@
 server:
   port: 8096
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://service-registry:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true
 spring:
   application:
     name: loan-orchestration
     version: 1.0
-  profiles:
-    active:
-      - local
+  #  config:
+  #    import: configserver:http://config-server:8888
+  #  profiles:
+  #    active:
+  #      - uat
+  cloud:
+    vault:
+      kv:
+        enabled: true
+        application-name: loan-orchestration
+      authentication: TOKEN
+      token: vOU1OCs0IDS6pjr6xGKgkq9AVWhCrs4fo5dVvuK3UDk
+      scheme: http
+      #      host: vault
+      #      port: 8200
+      uri: http://vault:8200
+    config:
+      import: vault://
   datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/loan_db?autoReconnect=true&useSSL=false
-    #url: jdbc:mysql://mysql:3306/loan_db?autoReconnect=true&useSSL=false
-    username: root
-    password: password
+    #driverClassName: com.mysql.cj.jdbc.Driver
+    #url: jdbc:mysql://localhost:3306/loan_db?autoReconnect=true&useSSL=false
+    url: jdbc:mysql://mysql:3306/loan_db?autoReconnect=true&useSSL=false
+    #username: root
+    #password: password
   jpa:
-    hibernate.ddl-auto: update
-    generate-ddl: true
+    database: MYSQL
     show-sql: true
-    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+    #database-platform: org.hibernate.dialect.MySQLDialect
+  driver-class-name: com.mysql.cj.jdbc.Driver
+
+
