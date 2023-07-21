@@ -3,6 +3,5 @@ server:
 spring:
   application:
     name: loan-orchestration
-    version: 1.0
   #config:
     #import: configserver:http://config-server:8888

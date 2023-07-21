@@ -1,7 +1,6 @@
 spring:
   application:
     name: account-service
-    version: 1.0
   profiles:
     active:
       - development

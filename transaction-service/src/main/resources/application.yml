@@ -30,7 +30,7 @@ spring:
                 headers: false
   data:
     mongodb:
-      user: root
+      username: root
       password: password
       authentication-database: admin
       uri: mongodb://root:password@mongodb:27017/transaction-db?authSource=admin
