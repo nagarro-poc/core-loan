@@ -1,4 +1,4 @@
-package org.bfsi.notification.config;
+package org.bfsi.orchestration.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.EnableCaching;

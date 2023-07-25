@@ -13,6 +13,7 @@ public class PersonalDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long personId;
+    private String leadId;
     private String firstName;
     private String lastName;
     private String fatherName;

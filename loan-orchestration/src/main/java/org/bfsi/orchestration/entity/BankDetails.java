@@ -13,6 +13,7 @@ public class BankDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long accountId;
+    private String leadId;
     private String accountNumber;
     private String bankName;
     private String ifsc;

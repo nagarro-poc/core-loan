@@ -1,23 +1,21 @@
 package org.bfsi.orchestration.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class LeadRequest {
+@Builder
+public class LoanRequest {
 
     private String leadId;
-    PersonalDetails personalDetails;
-
-    BankDetails bankDetails;
-
-    Address homeAddress;
-
-    Address officeAddress;
-
-    ContactDetails contactDetails;
+    private String firstName;
+    private String lastName;
+    private String pan;
+    private String mobileNumber;
+    private String email;
 
 }

@@ -16,6 +16,8 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long addressId;
 
+    private String leadId;
+
     private String address1;
     private String address2;
 
