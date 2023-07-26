@@ -1,5 +1,6 @@
 package org.bfsi.orchestration.service;
 
+import com.google.gson.Gson;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.bfsi.orchestration.bean.NotificationEntity;
 import org.bfsi.orchestration.entity.LoanRequest;
@@ -56,7 +57,8 @@ public class UpdateUserService {
                 .status("Loan application process started.")
                 .build();
 
-        kafkaProducer.sendMessageToNotification(entity);
+        kafkaProducer.sendMessage(new Gson().toJson(entity));
+        //kafkaProducer.sendMessageToNotification(entity);
 
     }
 }

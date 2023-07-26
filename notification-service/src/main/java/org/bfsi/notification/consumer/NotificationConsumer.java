@@ -1,5 +1,6 @@
 package org.bfsi.notification.consumer;
 
+import com.google.gson.Gson;
 import org.bfsi.notification.serviceImpl.NotificationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,18 +21,14 @@ public class NotificationConsumer {
             groupId = "${spring.kafka.consumer.group-id}"
     )
     public void consumer(String msg) {
-        /*org.bfsi.notification.Entity.NotificationEntity  entity = new
-                org.bfsi.notification.Entity.NotificationEntity ();
-
-        entity.setEmail(msg.getEmail());
-        entity.setFirstName(msg.getFirstName());
-        entity.setLastname(msg.getLastname());
-        entity.setMessage(msg.getMessage());
-        entity.setStatus(msg.getStatus());
-        entity.setLeadId(msg.getLeadId());*/
-
-        //notificationService.createNotification(entity);
         logger.info("Message Consumed Success: " + msg);
+        org.bfsi.notification.Entity.NotificationEntity entity =
+                new Gson().fromJson(msg, org.bfsi.notification.Entity.NotificationEntity.class);
+
+        logger.info("Message Consumed Success after: " + entity.getFirstName());
+
+        notificationService.createNotification(entity);
+
     }
 
 }

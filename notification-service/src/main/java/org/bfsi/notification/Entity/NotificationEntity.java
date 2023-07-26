@@ -17,9 +17,9 @@ public class NotificationEntity {
 
     private String leadId;
 
-    private String FirstName;
+    private String firstName;
 
-    private String Lastname;
+    private String lastname;
 
     private String email;
 
