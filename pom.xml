@@ -20,9 +20,7 @@
 	</properties>
 	<modules>
 		<module>user-service</module>
-		<module>account-service</module>
 		<module>notification-service</module>
-		<module>transaction-service</module>
 		<module>api-gateway</module>
 		<module>service-registry</module>
 		<module>identity-service</module>

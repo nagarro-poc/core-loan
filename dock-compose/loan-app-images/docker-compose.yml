@@ -1,5 +1,41 @@
 version: "3"
 services:
+  user-service:
+    container_name: user-service
+    build: ../../user-service
+    volumes:
+      - ~/nagarro/user-service:/logs
+    ports:
+      - "8092:8092"
+    networks:
+      - pre-defined-images_core-network
+  identity-service:
+    container_name: identity-service
+    build: ../../identity-service
+    volumes:
+      - ~/nagarro/identity-service:/logs
+    ports:
+      - "8082:8082"
+    networks:
+      - pre-defined-images_core-network
+  notification-service:
+    container_name: notification-service
+    build: ../../notification-service
+    volumes:
+      - ~/nagarro/notification-service:/logs
+    ports:
+      - "8088:8088"
+    networks:
+      - pre-defined-images_core-network
+  loan-orchestration:
+    container_name: loan-orchestration
+    build: ../../loan-orchestration
+    volumes:
+      - ~/nagarro/loan-orchestration:/logs
+    ports:
+      - "8096:8096"
+    networks:
+      - pre-defined-images_core-network
   bre-service:
     container_name: bre-service
     build: ../../bre-service
@@ -27,15 +63,6 @@ services:
       - "8095:8095"
     networks:
       - pre-defined-images_core-network
-  loan-orchestration:
-    container_name: loan-orchestration
-    build: ../../loan-orchestration
-    volumes:
-      - ~/nagarro/loan-orchestration:/logs
-    ports:
-      - "8096:8096"
-    networks:
-      - pre-defined-images_core-network
 networks:
-   pre-defined-images_core-network:
-     external: true
+  pre-defined-images_core-network:
+    external: true

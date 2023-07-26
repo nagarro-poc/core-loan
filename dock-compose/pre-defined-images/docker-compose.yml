@@ -1,12 +1,5 @@
 version: "3"
 services:
-#  rabbitmq:
-#    container_name: rabbitmq
-#    image: rabbitmq:management
-#    networks:
-#      - core-network
-#    ports:
-#      - "5672:5672"
   zookeeper:
     image: wurstmeister/zookeeper
     networks:
@@ -84,52 +77,6 @@ services:
     volumes:
       - "vault-logs:/vault/logs"
       - "vault-file:/vault/file"
-
-#  elasticsearch:
-#    image: docker.elastic.co/elasticsearch/elasticsearch:8.3.3
-#    container_name: elasticsearch_springboot
-#    environment:
-#      - bootstrap.memory_lock=true
-#      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-#      - "discovery.type=single-node"
-#      - xpack.security.enabled=false
-#    ports:
-#      - "9200:9200"
-#    volumes:
-#      - elasticsearch_data:/usr/share/elasticsearch/data
-#    networks:
-#      - core-network
-#
-#  kibana:
-#      image: docker.elastic.co/kibana/kibana:8.3.3
-#      container_name: kibana_springboot
-#      ports:
-#        - "5601:5601"
-#      environment:
-#        ELASTICSEARCH_URL: http://elasticsearch:9200
-#        ELASTICSEARCH_HOSTS: '["http://elasticsearch:9200"]'
-#      depends_on:
-#        - elasticsearch
-#      networks:
-#        - core-network
-#
-#  logstash:
-#      image: docker.elastic.co/logstash/logstash:8.3.3
-#      container_name: logstash_springboot
-#      volumes:
-#        - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
-#        - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
-#      ports:
-#        - "5044:5044"
-#        - "5000:5000/tcp"
-#        - "5000:5000/udp"
-#        - "9600:9600"
-#      environment:
-#        LS_JAVA_OPTS: "-Xmx256m -Xms256m"
-#      networks:
-#        - core-network
-#      depends_on:
-#        - elasticsearch
 networks:
   core-network:
     driver: bridge
@@ -144,5 +91,3 @@ volumes:
     driver: local
   vault-file:
     driver: local
-#  elasticsearch_data:
-#    driver: local
