@@ -1,6 +1,5 @@
 package org.bfsi.hunter.controller;
 
-import org.bfsi.hunter.entity.LeadRequest;
 import org.bfsi.hunter.entity.LeadResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +18,7 @@ public class HunterController {
     }
 
     @PostMapping
-    public ResponseEntity<LeadResponse> getBureauScore(LeadRequest leadRequest){
+    public ResponseEntity<LeadResponse> getFraudCheck(){
         return new ResponseEntity<LeadResponse>(new LeadResponse(), HttpStatus.OK);
     }
 
