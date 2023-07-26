@@ -20,4 +20,5 @@ public class PersonalDetails {
     private String pan;
     private String city;
     private String pincode;
+    private String amount;
 }
