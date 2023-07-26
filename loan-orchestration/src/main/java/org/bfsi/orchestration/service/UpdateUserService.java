@@ -1,6 +1,7 @@
 package org.bfsi.orchestration.service;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import org.bfsi.orchestration.bean.NotificationEntity;
 import org.bfsi.orchestration.entity.LoanRequest;
 import org.bfsi.orchestration.entity.UserModel;
 import org.bfsi.orchestration.producer.KafkaProducer;
@@ -43,5 +44,19 @@ public class UpdateUserService {
     public LoanRequest saveFallback(Exception e) {
         logger.info("UserFallback:" + e.toString());
         return new LoanRequest();
+    }
+
+    public void generateNotification(LoanRequest loanRequest) {
+        NotificationEntity entity = NotificationEntity.builder()
+                .firstName(loanRequest.getFirstName())
+                .lastname(loanRequest.getLastName())
+                .email(loanRequest.getEmail())
+                .mobile(loanRequest.getMobileNumber())
+                .leadId(loanRequest.getLeadId())
+                .status("Loan application process started.")
+                .build();
+
+        kafkaProducer.sendMessageToNotification(entity);
+
     }
 }

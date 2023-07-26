@@ -1,12 +1,12 @@
 version: "3"
 services:
-  rabbitmq:
-    container_name: rabbitmq
-    image: rabbitmq:management
-    networks:
-      - core-network
-    ports:
-      - "5672:5672"
+#  rabbitmq:
+#    container_name: rabbitmq
+#    image: rabbitmq:management
+#    networks:
+#      - core-network
+#    ports:
+#      - "5672:5672"
   zookeeper:
     image: wurstmeister/zookeeper
     networks:

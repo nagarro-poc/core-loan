@@ -70,6 +70,7 @@ public class OrchestrationController {
                     .mobileNumber(leadRequest.getContactDetails().getMobileNumber())
                     .build();
             updateUserService.udpateLoanFeign(loanRequest);
+           // updateUserService.generateNotification(loanRequest);
 
             leadService.generateLead(leadRequest);
             generateLeadService.generateLeadAction(leadRequest);

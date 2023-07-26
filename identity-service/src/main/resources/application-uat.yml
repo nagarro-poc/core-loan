@@ -12,7 +12,7 @@ spring:
     vault:
       kv:
         enabled: true
-        application-name: user-service
+        application-name: identity-service
       authentication: TOKEN
       token: vOU1OCs0IDS6pjr6xGKgkq9AVWhCrs4fo5dVvuK3UDk
       scheme: http
