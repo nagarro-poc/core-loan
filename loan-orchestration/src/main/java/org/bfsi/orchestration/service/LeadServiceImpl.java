@@ -26,7 +26,7 @@ public class LeadServiceImpl implements LeadService{
     AddressRepository addressRepository;
 
     @Override
-    public LeadResponse generateLead(LeadRequest leadRequest) {
+    public LeadResponse persistLeadData(LeadRequest leadRequest) {
         try {
 
             personalDetailsRepository.save(leadRequest.getPersonalDetails());

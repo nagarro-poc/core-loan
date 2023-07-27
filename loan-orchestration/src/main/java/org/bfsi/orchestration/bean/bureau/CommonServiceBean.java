@@ -1,15 +1,13 @@
 package org.bfsi.orchestration.bean.bureau;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BureauRequest {
+@ToString
+public class CommonServiceBean {
     private String leadId;
     private String firstName;
     private String lastName;

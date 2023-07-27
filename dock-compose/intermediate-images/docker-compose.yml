@@ -31,6 +31,15 @@ services:
       - service-registry
     networks:
       - pre-defined-images_core-network
+  identity-service:
+    container_name: identity-service
+    build: ../../identity-service
+    volumes:
+      - ~/nagarro/identity-service:/logs
+    ports:
+      - "8082:8082"
+    networks:
+      - pre-defined-images_core-network
 networks:
   pre-defined-images_core-network:
     external: true

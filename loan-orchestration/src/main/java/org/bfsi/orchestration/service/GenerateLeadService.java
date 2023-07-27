@@ -1,12 +1,19 @@
 package org.bfsi.orchestration.service;
 
-import org.bfsi.orchestration.bean.bureau.BureauRequest;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.bfsi.orchestration.bean.bureau.CommonServiceBean;
 import org.bfsi.orchestration.entity.LeadRequest;
+import org.bfsi.orchestration.service.feign.entity.*;
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.InvocationTargetException;
+
 @Service
 public class GenerateLeadService {
+    Logger logger = LogManager.getLogger(GenerateLeadService.class);
     @Autowired
     BREConnectorService breConnectorService;
 
@@ -16,15 +23,41 @@ public class GenerateLeadService {
     @Autowired
     HunterConnectorService hunterConnectorService;
 
-    public void generateLeadAction(LeadRequest leadRequest){
-        BureauRequest bureauRequest  = createObject(leadRequest);
+    public void executeLeadActions(LeadRequest leadRequest) throws InvocationTargetException, IllegalAccessException {
+        logger.info("Inside GenerateLeadService:executeLeadActions() start - " + leadRequest);
 
+        CommonServiceBean commonServiceBean = createObject(leadRequest);
+        logger.info("commonServiceBean -" + commonServiceBean);
+        BureauResponse bureauResponse = bureauInvoke(commonServiceBean);
+        BREResponse breResponse = breInvoke(commonServiceBean);
+        HunterResponse hunterResponse = hunterInvoke(commonServiceBean);
 
 
     }
 
-    private static BureauRequest createObject(LeadRequest leadRequest) {
-        return BureauRequest.builder()
+    private HunterResponse hunterInvoke(CommonServiceBean commonServiceBean) throws InvocationTargetException, IllegalAccessException {
+        HunterRequest hunterRequest = new HunterRequest();
+        BeanUtils.copyProperties(hunterRequest, commonServiceBean);
+        logger.info("hunterRequest -" + hunterRequest);
+        return hunterConnectorService.callHunterServiceFeign(hunterRequest);
+    }
+
+    private BREResponse breInvoke(CommonServiceBean commonServiceBean) throws InvocationTargetException, IllegalAccessException {
+        BRERequest breRequest = new BRERequest();
+        BeanUtils.copyProperties(breRequest, commonServiceBean);
+        logger.info("bureauRequest -" + breRequest);
+        return breConnectorService.callBREServiceFeign(breRequest);
+    }
+
+    private BureauResponse bureauInvoke(CommonServiceBean commonServiceBean) throws InvocationTargetException, IllegalAccessException {
+        BureauRequest bureauRequest = new BureauRequest();
+        BeanUtils.copyProperties(bureauRequest, commonServiceBean);
+        logger.info("bureauRequest -" + bureauRequest);
+        return bureauConnectorService.callBureauServiceFeign(bureauRequest);
+    }
+
+    private static CommonServiceBean createObject(LeadRequest leadRequest) {
+        return CommonServiceBean.builder()
                 .leadId(leadRequest.getLeadId())
                 .firstName(leadRequest.getPersonalDetails().getFirstName())
                 .lastName(leadRequest.getPersonalDetails().getLastName())

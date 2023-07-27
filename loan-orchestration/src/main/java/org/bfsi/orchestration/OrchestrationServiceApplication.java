@@ -27,7 +27,7 @@ public class OrchestrationServiceApplication {
 
     @PostConstruct
     public void logger(){
-        logger.info("INFO--->" + env.getProperty("spring.cloud.vault.token"));
+        logger.info("INFO--->" + env.getProperty("spring.application.name"));
         logger.info("INFO--->");
         logger.error("ERROR--->");
 

@@ -24,7 +24,7 @@ import java.util.UUID;
 @RequestMapping("/api/v1/leads")
 public class OrchestrationController {
 
-    Logger logger = LogManager.getLogger(this);
+    Logger logger = LogManager.getLogger(OrchestrationController.class);
 
     @Autowired
     LeadService leadService;
@@ -70,12 +70,13 @@ public class OrchestrationController {
                     .mobileNumber(leadRequest.getContactDetails().getMobileNumber())
                     .build();
             updateUserService.udpateLoanFeign(loanRequest);
-            updateUserService.generateNotification(loanRequest);
+            updateUserService.generateNotification(loanRequest, "Loan application process started.");
 
-            leadService.generateLead(leadRequest);
-            generateLeadService.generateLeadAction(leadRequest);
+            leadService.persistLeadData(leadRequest);
+            generateLeadService.executeLeadActions(leadRequest);
+
             LeadResponse response = LeadResponse.builder().statusCode(HttpStatus.OK.toString()).message("Welcome to Orchestration").build();
-            logger.info(leadRequest.toString());
+            logger.info("leadRequest -" + leadRequest.toString());
             return new ResponseEntity<>(response, HttpStatus.OK);
         }catch (Exception e) {
             LeadResponse response = LeadResponse.builder().statusCode(HttpStatus.OK.toString()).message("Some Error occurred").build();

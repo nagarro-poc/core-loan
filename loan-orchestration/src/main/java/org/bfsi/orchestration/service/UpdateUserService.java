@@ -47,18 +47,17 @@ public class UpdateUserService {
         return new LoanRequest();
     }
 
-    public void generateNotification(LoanRequest loanRequest) {
+    public void generateNotification(LoanRequest loanRequest, String status) {
         NotificationEntity entity = NotificationEntity.builder()
                 .firstName(loanRequest.getFirstName())
                 .lastname(loanRequest.getLastName())
                 .email(loanRequest.getEmail())
                 .mobile(loanRequest.getMobileNumber())
                 .leadId(loanRequest.getLeadId())
-                .status("Loan application process started.")
+                .status(status)
                 .build();
 
         kafkaProducer.sendMessage(new Gson().toJson(entity));
-        //kafkaProducer.sendMessageToNotification(entity);
 
     }
 }
