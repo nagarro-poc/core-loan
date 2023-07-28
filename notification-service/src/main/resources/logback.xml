@@ -1,11 +1,11 @@
 <configuration>
     <property name="MAX_HISTORY" value="7"/>
-    <property name="LOG_DIR" value="${LOG_DIR:-logs}"/>
+    <property name="LOG_DIR" value="logs}"/>
     <statusListener class="ch.qos.logback.core.status.NopStatusListener"/>
 
     <appender name="REQ_RESP_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_DIR}/trace.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+            <fileNamePattern>${LOG_DIR}/notification-service_trace.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
             <totalSizeCap>10MB</totalSizeCap>
             <maxHistory>${MAX_HISTORY}</maxHistory>
         </rollingPolicy>
@@ -18,7 +18,7 @@
 
     <appender name="ERROR_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_DIR}/error.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+            <fileNamePattern>${LOG_DIR}/notification-service_error.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
             <totalSizeCap>10MB</totalSizeCap>
             <maxHistory>${MAX_HISTORY}</maxHistory>
         </rollingPolicy>
@@ -42,7 +42,7 @@
 
     <appender name="INFO_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_DIR}/app.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+            <fileNamePattern>${LOG_DIR}/notification-service_info.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
             <totalSizeCap>10MB</totalSizeCap>
             <maxHistory>${MAX_HISTORY}</maxHistory>
         </rollingPolicy>
