@@ -28,12 +28,12 @@ public class BreController {
 
     @PostMapping
     public ResponseEntity<BREResponse> fetchBureauScore(@RequestBody BRERequest breRequest){
-
+        logger.info("BreController: fetchBureauScore()");
         if(Integer.valueOf(breRequest.getAmount()) < 100){
             throw new InvalidRequestException("Invalid amount");
         }
 
-        System.out.println("lead id - " + breRequest.getLeadId());
+        logger.info("lead id - " + breRequest.getLeadId());
         breService.saveEntity(breRequest);
         BREResponse response = breService.checkEligibility(breRequest);
         return new ResponseEntity<>(response, HttpStatus.OK);

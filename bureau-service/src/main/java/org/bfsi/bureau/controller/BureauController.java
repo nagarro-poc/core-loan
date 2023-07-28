@@ -30,9 +30,10 @@ public class BureauController {
     @PostMapping
     public ResponseEntity<BureauResponse> fetchBureauScore(@RequestBody BureauRequest bureauRequest){
         int score = BureauScore.getBureauScore();
-        System.out.println("Bureau Score is -" + score + " for lead id - " + bureauRequest.getLeadId());
+        logger.info("Bureau Score is -" + score + " for lead id - " + bureauRequest.getLeadId());
         bureauService.saveEntity(bureauRequest);
         BureauResponse response = bureauService.checkEligibility(score, bureauRequest);
+        logger.info("response : " + response);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
