@@ -39,4 +39,19 @@ public class LeadServiceImpl implements LeadService{
         }
         return null;
     }
+
+    public LeadRequest getLeadData(String leadId) {
+        LeadRequest leadRequest = new LeadRequest();
+        try {
+            leadRequest.setLeadId(leadId);
+            leadRequest.setPersonalDetails(personalDetailsRepository.findByLeadId(leadId));
+            leadRequest.setHomeAddress(addressRepository.findByLeadId(leadId).get(0));
+            leadRequest.setOfficeAddress(addressRepository.findByLeadId(leadId).get(1));
+            leadRequest.setBankDetails(bankDetailsRepository.findByLeadId(leadId));
+            leadRequest.setContactDetails(contactDetailsRepository.findByLeadId(leadId));
+        }catch (RuntimeException e){
+            e.printStackTrace();
+        }
+        return leadRequest;
+    }
 }

@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class LeadResponse {
 
     private String statusCode;
-
+    private String leadId;
     private String message;
 
 }

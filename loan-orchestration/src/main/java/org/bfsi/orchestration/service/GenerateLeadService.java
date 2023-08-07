@@ -23,16 +23,23 @@ public class GenerateLeadService {
     @Autowired
     HunterConnectorService hunterConnectorService;
 
+    @Autowired
+    UpdateUserService updateUserService;
+
     public void executeLeadActions(LeadRequest leadRequest) throws InvocationTargetException, IllegalAccessException {
         logger.info("Inside GenerateLeadService:executeLeadActions() start - " + leadRequest);
 
         CommonServiceBean commonServiceBean = createObject(leadRequest);
         logger.info("commonServiceBean -" + commonServiceBean);
         BureauResponse bureauResponse = bureauInvoke(commonServiceBean);
+         logger.info("Sending notification for bureau ");
+            updateUserService.sendBureauNotification(bureauResponse);
         BREResponse breResponse = breInvoke(commonServiceBean);
+        logger.info("Sending notification for BRE ");
+            updateUserService.sendBRENotification(breResponse);
         HunterResponse hunterResponse = hunterInvoke(commonServiceBean);
-
-
+        logger.info("Sending notification for hunter ");
+            updateUserService.sendHunterNotification(hunterResponse);
     }
 
     private HunterResponse hunterInvoke(CommonServiceBean commonServiceBean) throws InvocationTargetException, IllegalAccessException {

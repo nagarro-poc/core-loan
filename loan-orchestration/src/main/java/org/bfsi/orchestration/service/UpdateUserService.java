@@ -6,6 +6,9 @@ import org.bfsi.orchestration.bean.NotificationEntity;
 import org.bfsi.orchestration.entity.LoanRequest;
 import org.bfsi.orchestration.entity.UserModel;
 import org.bfsi.orchestration.producer.KafkaProducer;
+import org.bfsi.orchestration.service.feign.entity.BREResponse;
+import org.bfsi.orchestration.service.feign.entity.BureauResponse;
+import org.bfsi.orchestration.service.feign.entity.HunterResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,5 +62,18 @@ public class UpdateUserService {
 
         kafkaProducer.sendMessage(new Gson().toJson(entity));
 
+    }
+
+
+    public void sendBureauNotification(BureauResponse bureauResponse) {
+        kafkaProducer.sendMessage(new Gson().toJson(bureauResponse));
+    }
+
+    public void sendBRENotification(BREResponse breResponse) {
+        kafkaProducer.sendMessage(new Gson().toJson(breResponse));
+    }
+
+    public void sendHunterNotification(HunterResponse hunterResponse) {
+        kafkaProducer.sendMessage(new Gson().toJson(hunterResponse));
     }
 }

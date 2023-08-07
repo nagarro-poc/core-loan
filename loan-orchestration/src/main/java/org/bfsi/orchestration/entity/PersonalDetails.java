@@ -3,11 +3,13 @@ package org.bfsi.orchestration.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "personal_details")
+@ToString
 public class PersonalDetails {
 
     @Id

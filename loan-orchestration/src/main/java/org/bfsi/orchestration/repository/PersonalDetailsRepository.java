@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Component
 public interface PersonalDetailsRepository extends JpaRepository<PersonalDetails, Long> {
+    PersonalDetails findByLeadId(String leadId);
 }

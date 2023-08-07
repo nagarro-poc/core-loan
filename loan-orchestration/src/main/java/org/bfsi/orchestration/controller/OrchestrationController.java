@@ -75,7 +75,9 @@ public class OrchestrationController {
             leadService.persistLeadData(leadRequest);
             generateLeadService.executeLeadActions(leadRequest);
 
-            LeadResponse response = LeadResponse.builder().statusCode(HttpStatus.OK.toString()).message("Welcome to Orchestration").build();
+            LeadResponse response = LeadResponse.builder().statusCode(HttpStatus.OK.toString())
+                    .leadId(leadId)
+                    .message("Lead process started for given details, please refer the lead Id for future communication - " + leadId).build();
             logger.info("leadRequest -" + leadRequest.toString());
             return new ResponseEntity<>(response, HttpStatus.OK);
         }catch (Exception e) {
@@ -84,11 +86,17 @@ public class OrchestrationController {
         }
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<String> getLoanAndUserInfo(@PathVariable("id") Long id){
-        updateUserService.callUserModelFeign(id);
 
-        return new ResponseEntity<>("Welcome to Orchestration", HttpStatus.OK);
+    @GetMapping("{id}")
+    public ResponseEntity<LeadRequest> getLeadDetails(@PathVariable("id") String id){
+        LeadRequest leadRequest =   leadService.getLeadData(id);
+        return new ResponseEntity<>(leadRequest, HttpStatus.OK);
+    }
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<UserModel> getLoanAndUserInfo(@PathVariable("id") Long id){
+        UserModel model = updateUserService.callUserModelFeign(id);
+        return new ResponseEntity<>(model, HttpStatus.OK);
     }
 
     @Autowired
