@@ -11,8 +11,11 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class GlobalExceptionHandle extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = LeadNotFoundException.class)
-    public ResponseEntity<Object> LeadNotFoundException(){
-        return new ResponseEntity<>("Lead not found", HttpStatus.NOT_FOUND);
+    public ResponseEntity<Object> leadNotFoundException(LeadNotFoundException leadNotFoundException){
+        return new ResponseEntity<>(ErrorResponseBean.builder()
+                .errorCode(HttpStatus.NOT_FOUND.toString())
+                .message(leadNotFoundException.getMessage())
+                .build(), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(InvalidRequestException.class)

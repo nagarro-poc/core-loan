@@ -2,6 +2,7 @@ package org.bfsi.orchestration.service;
 
 import org.bfsi.orchestration.entity.LeadRequest;
 import org.bfsi.orchestration.entity.LeadResponse;
+import org.bfsi.orchestration.exception.LeadNotFoundException;
 import org.bfsi.orchestration.repository.AddressRepository;
 import org.bfsi.orchestration.repository.BankDetailsRepository;
 import org.bfsi.orchestration.repository.ContactDetailsRepository;
@@ -51,6 +52,9 @@ public class LeadServiceImpl implements LeadService{
             leadRequest.setContactDetails(contactDetailsRepository.findByLeadId(leadId));
         }catch (RuntimeException e){
             e.printStackTrace();
+        }
+        if(null == leadRequest.getPersonalDetails().getFirstName() ){
+            throw new LeadNotFoundException("Given lead is not available.");
         }
         return leadRequest;
     }
