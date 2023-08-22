@@ -1,5 +1,6 @@
 package org.bfsi.orchestration.service;
 
+import org.apache.commons.lang.StringUtils;
 import org.bfsi.orchestration.entity.LeadRequest;
 import org.bfsi.orchestration.entity.LeadResponse;
 import org.bfsi.orchestration.exception.LeadNotFoundException;
@@ -53,7 +54,7 @@ public class LeadServiceImpl implements LeadService{
         }catch (RuntimeException e){
             e.printStackTrace();
         }
-        if(null == leadRequest.getPersonalDetails().getFirstName() ){
+        if(StringUtils.isBlank(leadRequest.getPersonalDetails().getFirstName()) ){
             throw new LeadNotFoundException("Given lead is not available.");
         }
         return leadRequest;
